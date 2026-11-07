@@ -493,6 +493,7 @@
   function endGame() {              // botão "Finalizar partida"
     clearTimers();
     stopSounds();
+    stopKeepAlive();
     state = 'ended';
     el.stream.style.display = 'none';
     el.glass.classList.remove('alarm');
@@ -504,10 +505,45 @@
   let ctx = null;
   const live = new Set();           // tons agendados/tocando, para poder parar ao finalizar
   function unlockAudio() {
+    // iPhone: pede ao Safari para tratar o áudio como "reprodução de mídia",
+    // o que faz o som tocar mesmo com a chave lateral no silencioso
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+    startKeepAlive();
     try {
       if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
       if (ctx.state === 'suspended') ctx.resume();
     } catch (e) {}
+  }
+
+  // Plano B para iPhones/Safari mais antigos: um áudio mudo em loop durante a partida
+  // mantém a sessão de áudio em modo "mídia", e o alarme passa a tocar no silencioso.
+  let keepAlive = null;
+  function silentWavUrl() {
+    const rate = 8000, n = rate / 2;               // 0,5 s de silêncio
+    const buf = new ArrayBuffer(44 + n);
+    const v = new DataView(buf);
+    const w = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+    w(0, 'RIFF'); v.setUint32(4, 36 + n, true); w(8, 'WAVE'); w(12, 'fmt ');
+    v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+    v.setUint32(24, rate, true); v.setUint32(28, rate, true);
+    v.setUint16(32, 1, true); v.setUint16(34, 8, true);
+    w(36, 'data'); v.setUint32(40, n, true);
+    for (let i = 0; i < n; i++) v.setUint8(44 + i, 128);
+    return URL.createObjectURL(new Blob([buf], { type: 'audio/wav' }));
+  }
+  function startKeepAlive() {
+    try {
+      if (!keepAlive) {
+        keepAlive = new Audio(silentWavUrl());
+        keepAlive.loop = true;
+        keepAlive.setAttribute('playsinline', '');
+      }
+      const p = keepAlive.play();
+      if (p && p.catch) p.catch(() => {});
+    } catch (e) {}
+  }
+  function stopKeepAlive() {
+    try { if (keepAlive) keepAlive.pause(); } catch (e) {}
   }
   function beep(freq, when, dur, type = 'square', vol = 0.35) {
     const o = ctx.createOscillator();
