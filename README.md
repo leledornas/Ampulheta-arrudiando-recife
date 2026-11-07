@@ -4,6 +4,8 @@ Temporizador de ampulheta para o jogo Arrudiando Recife, feito para o celular. C
 
 É uma tela única, em um único arquivo HTML, sem dependências e sem etapa de build.
 
+**🔗 Acesse online:** [leledornas.github.io/Ampulheta-arrudiando-recife](https://leledornas.github.io/Ampulheta-arrudiando-recife/)
+
 ## Como funciona
 
 1. Toque em **Começar partida**. A ampulheta começa a correr e o relógio mostra o tempo decorrido.
