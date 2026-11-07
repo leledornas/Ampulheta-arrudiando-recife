@@ -14,33 +14,6 @@ Temporizador de ampulheta para o jogo Arrudiando Recife, feito para o celular. C
 
 O botão de som, no canto superior direito, liga e desliga o alarme.
 
-## Como usar
-
-**Direto no computador:** dê dois cliques em `temporizador-ampulheta-recifense.html`.
-
-**Servindo localmente (para testar no celular na mesma rede Wi-Fi):**
-
-```bash
-python3 -m http.server 8000
-```
-
-Abra `http://<ip-do-computador>:8000/temporizador-ampulheta-recifense.html` no celular.
-
-## Personalização
-
-As configurações ficam no começo do bloco `<script>`:
-
-| Constante | Padrão | O que faz |
-|---|---|---|
-| `MIN_SECONDS` | `25` | Menor duração possível de uma rodada (segundos) |
-| `MAX_SECONDS` | `40` | Maior duração possível de uma rodada (segundos) |
-| `ALARM_REPEATS` | `4` | Quantas vezes o alarme toca antes da próxima rodada |
-| `ALARM_GAP` | `0.7` | Intervalo entre um toque e outro (segundos) |
-
-A pausa até a próxima rodada começar se ajusta sozinha a `ALARM_REPEATS` e `ALARM_GAP`. O texto "25–40 segundos" do card na tela também acompanha `MIN_SECONDS` e `MAX_SECONDS`.
-
-As cores estão como variáveis CSS no `:root` (`--navy`, `--coral`, `--sun`, `--teal`, `--cream`).
-
 ## Detalhes técnicos
 
 - **Som:** gerado pelo navegador com a Web Audio API, sem arquivo de áudio. Navegadores só liberam som depois de um toque do usuário, e o toque em "Começar partida" já faz isso.
@@ -54,10 +27,3 @@ As cores estão como variáveis CSS no `:root` (`--navy`, `--coral`, `--sun`, `-
 - No iPhone, o modo silencioso pode abafar o alarme, e o Safari não suporta vibração.
 - Se o navegador for para segundo plano, o alarme ainda dispara no fim da rodada, mas o sistema pode atrasar o som em alguns segundos.
 - Os recursos de tela sempre ligada e vibração dependem do aparelho e do navegador.
-
-## Estrutura
-
-```
-temporizador-ampulheta-recifense.html   # site completo (HTML + CSS + JS)
-README.md
-```
