@@ -13,7 +13,7 @@
   const $ = (id) => document.getElementById(id);
   const el = {
     app: $('app'), glass: $('glass'),
-    pill: $('pill'), pillText: $('pillText'), title: $('title'),
+    pill: $('pill'), pillText: $('pillText'),
     time: $('time'), timeLabel: $('timeLabel'),
     mainBtn: $('mainBtn'), mainBtnText: $('mainBtnText'),
     soundBtn: $('soundBtn'),
@@ -75,29 +75,24 @@
   /* ===== Interface por estado ===== */
   function render() {
     el.rounds.textContent = rounds;
-    el.title.hidden = state === 'idle';   // na tela inicial não mostra título
     const finished = state === 'alarm' || state === 'ended';
     el.pill.className = 'pill ' + (finished ? 'done' : state);
     el.app.classList.toggle('done', finished);
 
     if (state === 'idle') {
       el.pillText.textContent = 'Pronto para jogar';
-      el.title.textContent = 'Pronto pra girar?';
       el.timeLabel.textContent = 'Aguardando início';
       setMain('play', 'Começar partida', false);
     } else if (state === 'running') {
       el.pillText.textContent = 'Partida em andamento';
-      el.title.textContent = 'O tempo está passando!';
       el.timeLabel.textContent = 'Tempo decorrido';
       setMain('stop', 'Finalizar partida', true);
     } else if (state === 'alarm') {
       el.pillText.textContent = 'Vez de girar a roleta!';
-      el.title.textContent = 'O tempo acabou!';
       el.timeLabel.textContent = 'Tempo da rodada';
       setMain('stop', 'Finalizar partida', true);
     } else {
       el.pillText.textContent = 'Partida encerrada';
-      el.title.textContent = 'O tempo está passando!';
       el.timeLabel.textContent = 'Partida finalizada';
       setMain('play', 'Começar nova partida', false);
     }

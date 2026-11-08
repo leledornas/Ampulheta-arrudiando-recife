@@ -94,15 +94,6 @@
   .pill.running i { animation: blink 1s infinite; }
   .pill.done    { color: #C23B2C; background: #FDE4E0; border-color: #F8B8B0; }
 
-  h1 {
-    font-family: 'Anton', 'Archivo Narrow', Impact, sans-serif;
-    font-weight: 400;
-    font-size: clamp(30px, 9vw, 40px);
-    line-height: 1.05;
-    letter-spacing: -.01em;
-    margin-top: 12px;
-    text-transform: none;
-  }
 
   /* ---------- Ampulheta ---------- */
   .glass-wrap {
@@ -190,7 +181,6 @@
   @media (max-height: 700px) {
     .range-card { margin-top: 14px; padding: 8px 14px; }
     .time-label { margin-bottom: 10px; }
-    h1 { margin-top: 8px; }
   }
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
