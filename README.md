@@ -1,6 +1,6 @@
 # Arrudiando Recife – Ampulheta
 
-Temporizador de ampulheta para jogos de tabuleiro e festas, feito para o celular. Cada rodada dura um tempo **aleatório entre 25 e 40 segundos**, que o jogador não vê. Quando a areia acaba, um alarme toca para avisar que é a vez de girar a roleta.
+Temporizador de ampulheta para o jogo Arrudiando Recife, feito para o celular. Cada rodada dura um tempo **aleatório entre 25 e 40 segundos**, que o jogador não vê. Quando a areia acaba, um alarme toca para avisar que é a vez de girar a roleta.
 
 É uma tela única, feita só com HTML, CSS e JavaScript puros, sem dependências e sem etapa de build.
 
