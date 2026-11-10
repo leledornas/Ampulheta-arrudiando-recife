@@ -2,7 +2,7 @@
   'use strict';
 
   /* ===== Configuração ===== */
-  const MIN_SECONDS = 25;       // menor duração de uma rodada
+  const MIN_SECONDS = 30;       // menor duração de uma rodada
   const MAX_SECONDS = 40;       // maior duração de uma rodada
   const ALARM_REPEATS = 4;      // quantas vezes o alarme toca antes de reiniciar
   const ALARM_GAP = 0.7;        // segundos entre um toque e o próximo
